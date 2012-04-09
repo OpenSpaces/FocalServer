@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+        
+<beans>
+
+    <!--Create Local MBeanServer-->
+    <bean id="mbeanServer"
+    class="org.springframework.jmx.support.MBeanServerFactoryBean"/>
+
+    <!--
+    Helper bean to register MBeans to MBeanServer
+    this bean needs to be eagerly pre-instantiated in order for the exporting to occur;
+    this means that it must not be marked as lazily initialized
+    -->
+    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter">
+        <property name="beans">
+            <map>
+                <entry key="com.gigaspaces.focalserver:type=FocalServer" value-ref="focalServer"/>
+                <entry key="com.gigaspaces.focalserver:type=JMXConnectionFinder" value-ref="connectionFinder"/>
+                <entry key="connectors:type=RMIConnector" value-ref="rmiConnector"/>
+                <!--
+                <entry key="connectors:type=HTTPAdaptor" value-ref="SunHTTPAdaptor"/>
+                <entry key="connector:type=HTTPAdaptor" value-ref="MX4JHttpAdaptor"/>
+                <entry key="MX4J:name=XSLTProcessor" value-ref="XSLTProcessor"/>
+-->
+            </map>
+        </property>
+    </bean>
+
+    <!--FocalServer MBean-->
+    <bean id="focalServer" class="com.gigaspaces.jmx.focalserver.FocalServer">
+    </bean>
+
+    <!--JMXConnectionFinder MBean-->
+    <bean id="connectionFinder" class="com.gigaspaces.jmx.focalserver.JMXConnectionFinder">
+        <!--Jini Multicast-->
+<!--
+        <property name="groups">
+            <list>
+                <value>group1</value>
+                <value>group2</value>
+            </list>
+        </property>
+-->
+        <!--Jini unicast-->
+<!--
+        <property name="locators">
+            <list>
+                <value>jini://localhost</value>
+            </list>
+        </property>
+-->
+    </bean>
+
+    <!--Create RMI Registry-->
+    <bean id="registry"
+          class="org.springframework.remoting.rmi.RmiRegistryFactoryBean">
+        <property name="port" value="1099"/>
+    </bean>
+
+    <!--RMI Connector-->
+    <bean id="rmiConnector"
+          class="org.springframework.jmx.support.ConnectorServerFactoryBean"
+          depends-on="registry">
+        <property name="serviceUrl"
+                  value="service:jmx:rmi://localhost/jndi/rmi://localhost:1099/rmiConnector"/>
+        <property name="environment">
+            <map>
+                <entry key="jmx.remote.jndi.rebind" value="true"/>
+            </map>
+        </property>
+    </bean>
+
+
+    <!--MX4J HTTP Adaptor-->
+<!--
+    <bean id="XSLTProcessor"
+          class="mx4j.tools.adaptor.http.XSLTProcessor"/>
+    <bean id="MX4JHttpAdaptor"
+          class="mx4j.tools.adaptor.http.HttpAdaptor">
+        <property name="processor" ref="XSLTProcessor"/>
+        <property name="port" value="8082"/>
+    </bean>
+-->
+
+    <!--Sun HTTP Adaptor-->
+    <!--
+    <bean id="SunHTTPAdaptor" class="com.sun.jdmk.comm.HtmlAdaptorServer" init-method="start">
+        <property name="port" value="8082"/>
+    </bean>
+    -->
+
+</beans>
