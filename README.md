@@ -17,13 +17,14 @@ Required Steps to use the Focal Server
 
 To use the Focal Server:
 
-    Start <GigaSpaces Root>\bin\gs-focalserver.bat/.sh.
-    Wait until the Focal Server finishes scanning the network for all available Jini Lookup Services and registered MBeans.
-    Open JConsole and connect using the default settings (you can change them in <GigaSpaces Root>\config\tools\focalserver.xml).
+Start <GigaSpaces Root>\bin\gs-focalserver.bat/.sh.
+
+Wait until the Focal Server finishes scanning the network for all available Jini Lookup Services and registered MBeans.
+Open JConsole and connect using the default settings (you can change them in <GigaSpaces Root>\config\tools\focalserver.xml).
 
     service:jmx:rmi://localhost/jndi/rmi://localhost:1099/rmiConnector
 
-    Open a browser (Internet Explorer, Firefox, etc.) and connect to http://localhost:8082.
+Open a browser (Internet Explorer, Firefox, etc.) and connect to http://localhost:8082.
 
 Performance Impact
 ------------------
