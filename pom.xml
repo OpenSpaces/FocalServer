@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.openspaces</groupId>
+  <artifactId>FocalServer</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>FocalServer</name>
+  <description>A focal server for JMX</description>
+  
+	<repositories>
+		<repository>
+			<id>org.openspaces</id>
+			<url>http://maven-repository.openspaces.org</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.gigaspaces</groupId>
+			<artifactId>gs-openspaces</artifactId>
+			<version>8.0.6</version>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>3.0.7.RELEASE</version>
+			<scope>provided</scope>
+		</dependency>
+  </dependencies>
+</project>
