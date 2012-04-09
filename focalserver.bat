@@ -1,5 +1,5 @@
 @echo off
-@rem This script starts the GigaSpaces JMX FocalServer
+@rem This script starts the JMX FocalServer
 
 rem Use local variables
 setlocal
