@@ -1,3 +1,6 @@
+[![Build Status](https://secure.travis-ci.org/OpenSpaces/FocalServer.png)](http://travis-ci.org/OpenSpaces/FocalServer)
+
+
 Requirements
 -------------
 
